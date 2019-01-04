@@ -7,4 +7,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="pianoWhiteStyle">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

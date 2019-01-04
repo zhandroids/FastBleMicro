@@ -36,7 +36,6 @@ import android.widget.Toast;
 import com.clj.blesample.adapter.DeviceAdapter;
 import com.clj.blesample.comm.ObserverManager;
 import com.clj.blesample.operation.OperationActivity;
-import com.clj.blesample.operation.TestCarActivity;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleGattCallback;
 import com.clj.fastble.callback.BleMtuChangedCallback;
@@ -165,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     if (bleDevice.getName().contains("BBC micro:bit")) {
 
-                        Intent intent = new Intent(MainActivity.this, TestCarActivity.class);
+                        Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                         intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
                         startActivity(intent);
 
@@ -214,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String[] names;
         String str_name = et_name.getText().toString();
+//        str_name="BBC micro:bit";
         if (TextUtils.isEmpty(str_name)) {
             names = null;
         } else {
@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img_loading.setVisibility(View.INVISIBLE);
                 btn_scan.setText(getString(R.string.start_scan));
                 progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, getString(R.string.connect_fail), Toast
+                Toast.makeText(MainActivity.this, getString(R.string.connect_fail)+exception, Toast
                         .LENGTH_LONG).show();
             }
 

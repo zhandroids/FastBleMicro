@@ -27,8 +27,9 @@
             android:id="@+id/button_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:text="向右"/>
 
         <Button
@@ -43,10 +44,54 @@
             android:id="@+id/button_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
+            android:layout_centerInParent="true"
             android:text="停止"/>
 
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@android:color/background_dark"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/piano_1"
+            style="@style/pianoWhiteStyle"
+            android:text="do"/>
+
+        <TextView
+            android:id="@+id/piano_2"
+            style="@style/pianoWhiteStyle"
+            android:text="re"/>
+
+        <TextView
+            android:id="@+id/piano_3"
+            style="@style/pianoWhiteStyle"
+            android:text="mi"/>
+
+        <TextView
+            android:id="@+id/piano_4"
+            style="@style/pianoWhiteStyle"
+            android:text="fa"/>
+
+        <TextView
+            android:id="@+id/piano_5"
+            style="@style/pianoWhiteStyle"
+            android:text="sol"/>
+
+        <TextView
+            android:id="@+id/piano_6"
+            style="@style/pianoWhiteStyle"
+            android:text="la"/>
+
+        <TextView
+            android:id="@+id/piano_7"
+            style="@style/pianoWhiteStyle"
+            android:text="si"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>

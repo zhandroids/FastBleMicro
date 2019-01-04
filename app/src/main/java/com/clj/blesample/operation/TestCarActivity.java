@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.clj.blesample.R;
 import com.clj.fastble.BleManager;
@@ -24,7 +27,8 @@ import java.util.UUID;
  * @date 2018/12/29
  */
 
-public class TestCarActivity extends AppCompatActivity implements View.OnClickListener {
+public class TestCarActivity extends AppCompatActivity implements View.OnClickListener, View
+        .OnTouchListener {
 
     Button btnRun;
     Button btnLeft;
@@ -38,6 +42,9 @@ public class TestCarActivity extends AppCompatActivity implements View.OnClickLi
     public static final String UART_TX_CHARACTERISTIC_UUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
     public static final String UART_RX_CHARACTERISTIC_UUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
     private Button btnStop;
+
+    int pianoBtnId[] = {R.id.piano_1, R.id.piano_2, R.id.piano_3, R.id.piano_4, R.id.piano_5, R
+            .id.piano_6, R.id.piano_7};
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -58,14 +65,19 @@ public class TestCarActivity extends AppCompatActivity implements View.OnClickLi
         btnRun.setOnClickListener(this);
         btnStop.setOnClickListener(this);
 
+        for (int i = 0; i < pianoBtnId.length; i++) {
+            TextView textView = (TextView) findViewById(pianoBtnId[i]);
+            textView.setOnTouchListener(this);
+        }
+
 
         BleDevice bleDevice = getIntent().getParcelableExtra(KEY_DATA);
 
-         bluetoothGatt = BleManager.getInstance().getBluetoothGatt(bleDevice);
+        bluetoothGatt = BleManager.getInstance().getBluetoothGatt(bleDevice);
 //        List<BluetoothGattService> serviceList = bluetoothGatt.getServices();
 
-        BluetoothGattService gattService =      bluetoothGatt.getService(UUID.fromString(UARTSERVICE_SERVICE_UUID));
-
+        BluetoothGattService gattService = bluetoothGatt.getService(UUID.fromString
+                (UARTSERVICE_SERVICE_UUID));
 
 
         //BluetoothGattCharacteristic
@@ -86,9 +98,7 @@ public class TestCarActivity extends AppCompatActivity implements View.OnClickLi
                 .fromString(UART_TX_CHARACTERISTIC_UUID));
 
 
-
-        if (notifyCharacteristic==null)
-        {
+        if (notifyCharacteristic == null) {
             return;
         }
 
@@ -109,8 +119,7 @@ public class TestCarActivity extends AppCompatActivity implements View.OnClickLi
                     }
 
                     @Override
-                    public void onNotifyFailure(final BleException
-                                                        exception) {
+                    public void onNotifyFailure(final BleException exception) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -131,7 +140,8 @@ public class TestCarActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 });
 
-        characteristic = gattService.getCharacteristic(UUID.fromString(UART_RX_CHARACTERISTIC_UUID));
+        characteristic = gattService.getCharacteristic(UUID.fromString
+                (UART_RX_CHARACTERISTIC_UUID));
 
 
     }
@@ -167,11 +177,9 @@ public class TestCarActivity extends AppCompatActivity implements View.OnClickLi
     private byte[] WriteBytes = new byte[20];
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public void SendBLEData(String paramString)
-    {
+    public void SendBLEData(String paramString) {
         int i = this.characteristic.getProperties();
-        if ((i | 0x2) > 0)
-        {
+        if ((i | 0x2) > 0) {
 //            if (this.mNotifyCharacteristic != null)
 //            {
 //                this.mBluetoothLeService.setCharacteristicNotification(this
@@ -194,4 +202,32 @@ public class TestCarActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+
+                for (int i = 0; i < pianoBtnId.length; i++) {
+                    if (v.getId()==pianoBtnId[i]){
+                        SendBLEData((i+1)+"#");
+                        break;
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+
+                Log.e("asker", "onTouch: "+"发送停止指令" );
+
+                SendBLEData("O#");
+                break;
+
+            default:
+                break;
+
+
+        }
+
+        return true;
+    }
 }

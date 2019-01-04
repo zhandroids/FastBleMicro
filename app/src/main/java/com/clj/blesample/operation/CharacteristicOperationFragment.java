@@ -163,7 +163,7 @@ public class CharacteristicOperationFragment extends Fragment {
                                 byte[] arrayOfByte = new byte[20];
                                 arrayOfByte[0] = 0;
                                 writeBytes = hex.getBytes();
-                                characteristic.setValue(arrayOfByte[0], 17, 0);
+//                                characteristic.setValue(arrayOfByte[0], 17, 0);
                                 characteristic.setValue(writeBytes);
                                boolean boo =  bluetoothGatt.writeCharacteristic(characteristic);
 
@@ -226,7 +226,7 @@ public class CharacteristicOperationFragment extends Fragment {
                                     bleDevice,
                                     characteristic.getService().getUuid().toString(),
                                     characteristic.getUuid().toString(),
-                                    HexUtil.hexStringToBytes(hex),
+                                    hex.getBytes(),
                                     new BleWriteCallback() {
 
                                         @Override
@@ -361,12 +361,14 @@ public class CharacteristicOperationFragment extends Fragment {
                                             }
 
                                             @Override
-                                            public void onCharacteristicChanged(byte[] data) {
+                                            public void onCharacteristicChanged(final byte[] data) {
+
+                                                Log.e("asker", "onCharacteristicChanged: "+Integer.parseInt(HexUtil.formatHexString(data),16));
                                                 runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        addText(txt, HexUtil.formatHexString
-                                                                (characteristic.getValue(), true));
+//                                                        addText(txt, HexUtil.formatHexString
+//                                                                (h, true));
                                                     }
                                                 });
                                             }

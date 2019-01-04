@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp">
+
+            <Button
+                android:id="@+id/button_run"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="前进"/>
+
+            <Button
+                android:id="@+id/button_left"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="向左"/>
+
+            <Button
+                android:id="@+id/button_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="向右"/>
+
+            <Button
+                android:id="@+id/button_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="后退"/>
+
+            <Button
+                android:id="@+id/button_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="停止"/>
+
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/button_bell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="喇叭"/>
+
+        <EditText
+            android:id="@+id/et_led"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:inputType="text"
+            android:layout_below="@id/button_bell"/>
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/et_led"
+            android:text="发送"/>
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@android:color/background_dark"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/piano_1"
+            style="@style/pianoWhiteStyle"
+            android:text="do"/>
+
+        <TextView
+            android:id="@+id/piano_2"
+            style="@style/pianoWhiteStyle"
+            android:text="re"/>
+
+        <TextView
+            android:id="@+id/piano_3"
+            style="@style/pianoWhiteStyle"
+            android:text="mi"/>
+
+        <TextView
+            android:id="@+id/piano_4"
+            style="@style/pianoWhiteStyle"
+            android:text="fa"/>
+
+        <TextView
+            android:id="@+id/piano_5"
+            style="@style/pianoWhiteStyle"
+            android:text="sol"/>
+
+        <TextView
+            android:id="@+id/piano_6"
+            style="@style/pianoWhiteStyle"
+            android:text="la"/>
+
+        <TextView
+            android:id="@+id/piano_7"
+            style="@style/pianoWhiteStyle"
+            android:text="si"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/log_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
